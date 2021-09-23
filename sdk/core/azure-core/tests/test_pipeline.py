@@ -63,7 +63,7 @@ def test_default_http_logging_policy(http_request):
     pipeline_client = PipelineClient(base_url="test")
     pipeline = pipeline_client._build_pipeline(config)
     http_logging_policy = pipeline._impl_policies[-1]._policy
-    assert http_logging_policy.allowed_header_names == HttpLoggingPolicy.DEFAULT_HEADERS_WHITELIST
+    assert http_logging_policy.allowed_header_names == HttpLoggingPolicy.DEFAULT_HEADERS_ALLOWLIST
 
 @pytest.mark.parametrize("http_request", HTTP_REQUESTS)
 def test_pass_in_http_logging_policy(http_request):
@@ -77,7 +77,7 @@ def test_pass_in_http_logging_policy(http_request):
     pipeline_client = PipelineClient(base_url="test")
     pipeline = pipeline_client._build_pipeline(config)
     http_logging_policy = pipeline._impl_policies[-1]._policy
-    assert http_logging_policy.allowed_header_names == HttpLoggingPolicy.DEFAULT_HEADERS_WHITELIST.union({"x-ms-added-header"})
+    assert http_logging_policy.allowed_header_names == HttpLoggingPolicy.DEFAULT_HEADERS_ALLOWLIST.union({"x-ms-added-header"})
 
 
 @pytest.mark.parametrize("http_request", HTTP_REQUESTS)
